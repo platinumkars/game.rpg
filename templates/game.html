@@ -10,15 +10,41 @@
     {% extends "base.html" %}
     {% block content %}
     <div class="game-container">
-        <div class="character-info">
-            <h2 id="char-name"></h2>
-            <div id="stats">
-                <p>HP: <span id="health"></span>/<span id="max-health"></span></p>
-                <p>MP: <span id="mana"></span>/<span id="max-mana"></span></p>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card character-info mb-3">
+                    <div class="card-body">
+                        <h2 id="char-name" class="card-title"></h2>
+                        <div id="stats">
+                            <div class="progress mb-2">
+                                <div id="health-bar" class="progress-bar bg-danger" role="progressbar" aria-label="Health bar"></div>
+                            </div>
+                            <p>HP: <span id="health"></span>/<span id="max-health"></span></p>
+                            <div class="progress mb-2">
+                                <div id="mana-bar" class="progress-bar bg-primary" role="progressbar" aria-label="Mana bar"></div>
+                            </div>
+                            <p>MP: <span id="mana"></span>/<span id="max-mana"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h3 class="card-title">Combat Log</h3>
+                        <div id="combat-log" class="overflow-auto combat-log-height"></div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Actions</h3>
+                        <div id="actions" class="d-flex flex-wrap gap-2"></div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div id="combat-log"></div>
-        <div id="actions"></div>
     </div>
     {% endblock %}
     <script src="{{ url_for('static', filename='js/game.js') }}"></script>
