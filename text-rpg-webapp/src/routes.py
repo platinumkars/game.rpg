@@ -1,17 +1,19 @@
-from flask import Blueprint, render_template, request
-from .game_logic import Character, Enemy
+from flask import Blueprint, render_template, jsonify, request
+from game_logic import Character, Enemy
 
-routes = Blueprint('routes', __name__)
+# Create a Blueprint
+game_bp = Blueprint('game', __name__)
 
-@routes.route('/')
+@game_bp.route('/')
 def index():
     return render_template('index.html')
-
-@routes.route('/game', methods=['GET', 'POST'])
+    
+@game_bp.route('/game')
 def game():
-    if request.method == 'POST':
-        player_name = request.form.get('player_name')
-        class_type = request.form.get('class_type')
-        player = Character(player_name, class_type)
-        return render_template('game.html', player=player)
     return render_template('game.html')
+    
+@game_bp.route('/api/create_character', methods=['POST'])
+def create_character():
+    data = request.json
+    character = Character(data['name'], data['class_type'])
+    return jsonify(character.__dict__)

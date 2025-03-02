@@ -7,15 +7,20 @@
     <title>Text RPG Game</title>
 </head>
 <body>
-    {% include 'base.html' %}
-    
+    {% extends "base.html" %}
+    {% block content %}
     <div class="game-container">
-        <h1>Welcome to the Text RPG Game!</h1>
-        <div id="game-output"></div>
-        <input type="text" id="user-input" placeholder="Enter your command here...">
-        <button id="submit-btn">Submit</button>
+        <div class="character-info">
+            <h2 id="char-name"></h2>
+            <div id="stats">
+                <p>HP: <span id="health"></span>/<span id="max-health"></span></p>
+                <p>MP: <span id="mana"></span>/<span id="max-mana"></span></p>
+            </div>
+        </div>
+        <div id="combat-log"></div>
+        <div id="actions"></div>
     </div>
-
+    {% endblock %}
     <script src="{{ url_for('static', filename='js/game.js') }}"></script>
 </body>
 </html>
